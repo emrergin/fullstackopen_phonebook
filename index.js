@@ -5,7 +5,7 @@ const cors = require('cors')
 const app = express()
 
 app.use(express.json());
-
+app.use(express.static('build'))
 app.use(morgan(function (tokens, req, res) {
   return [
     tokens.method(req, res),
@@ -103,7 +103,7 @@ let persons = [
   
     response.json(person)
   })
-  
+
   const PORT = process.env.PORT || 3001
 
   app.listen(PORT, () => {
