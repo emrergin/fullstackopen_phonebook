@@ -18,27 +18,27 @@ const Person = mongoose.model('Person', personSchema)
 
 mongoose
   .connect(url)
-  .then((result) => {
+  .then(() => {
     console.log('connected')
 
     if (process.argv[3]){
-    const person = new Person({
+      const person = new Person({
         name: process.argv[3],
         number: process.argv[4],
-    })
-    return person.save()
-    .then(() => {
-        console.log('note saved!')
-        return mongoose.connection.close()
-      })}
+      })
+      return person.save()
+        .then(() => {
+          console.log('note saved!')
+          return mongoose.connection.close()
+        })}
     else{
-        Person.find({}).then(result => {
-            result.forEach(note => {
-              console.log(note)
-            })
-            mongoose.connection.close()
-          })
-    }    
+      Person.find({}).then(result => {
+        result.forEach(note => {
+          console.log(note)
+        })
+        mongoose.connection.close()
+      })
+    }
   })
 
   .catch((err) => console.log(err))
